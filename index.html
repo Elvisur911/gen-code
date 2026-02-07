@@ -25,6 +25,7 @@
     .card h3 { margin-bottom: .5rem; }
     .card p { margin-bottom: .5rem; }
     .price { color: #2e7d32; font-weight: bold; }
+    .image img { width: 100%; height: auto; border-radius: 4px; }
 
     /* =====================
        FORMS
@@ -70,7 +71,7 @@
       <h2>User Registration</h2>
       <form id="regForm">
         <label>Full Name
-          <input type="text" id="name" required />
+          <input type="text" id="name" required maxlength="25" minlength="2" />
         </label>
         <label>Email
           <input type="email" id="email" required />
@@ -78,7 +79,7 @@
         <label>Password
           <input type="password" id="password" required minlength="6" />
         </label>
-        <button type="submit">Register</button>
+        <button type="submit" >Register</button>
       </form>
     </section>
   </main>
@@ -92,10 +93,26 @@
        SAMPLE PRODUCTS DATA
     ======================*/
     const products = [
-      { name: 'Fresh Tomatoes', price: 120 },
-      { name: 'Organic Kale', price: 80 },
-      { name: 'Bananas', price: 100 },
-      { name: 'Irish Potatoes', price: 150 }
+      { name: 'Fresh Tomatoes', price: 120, image: '<img src="images/tomato.jpeg" alt="Fresh Tomatoes"/>' },
+      { name: 'Organic Kale', price: 80, image: '<img src="images/kales.jpeg" alt="Organic Kale"/>' },
+      { name: 'Bananas', price: 100, image: '<img src="images/banana.avif" alt="Bananas"/>' },
+      { name: 'Irish Potatoes', price: 150, image: '<img src="images/potato.jpeg" alt="Irish Potatoes"/>' },
+      { name: 'Carrots', price: 90, image: '<img src="images/carrot.jpeg" alt="Carrots"/>' },
+      { name: 'Oranges', price: 110, image: '<img src="images/orange.jpeg" alt="Oranges"/>' },
+      { name: 'Apples', price: 130, image: '<img src="images/banana.avif" alt="Apples"/>' },
+      { name: 'Mangoes', price: 140, image: '<img src="images/mango.jpeg" alt="Mangoes"/>' },
+      { name: 'Pineapples', price: 160, image: '<img src="images/pineapple.webp" alt="Pineapples"/>' },
+      { name: 'Watermelon', price: 200, image: '<img src="images/Watermelon.webp" alt="Watermelon"/>' },
+      { name: 'Avocado', price: 120, image: '<img src="images/avocado.jpeg" alt="Avocado"/>' },
+      { name: 'Grapes', price: 180, image: '<img src="images/grapes.webp" alt="Grapes"/>' },
+      { name: 'Strawberries', price: 150, image: '<img src="images/strawberry.jpeg" alt="Strawberries"/>' },
+      { name: 'Papayas', price: 130, image: '<img src="images/papaya.jpeg" alt="Papayas"/>' },
+      { name: 'Guava', price: 100, image: '<img src="images/guava.jpeg" alt="Guava"/>' },
+      { name: 'Passion Fruit', price: 95, image: '<img src="images/passion.jpeg" alt="Passion Fruit"/>' },
+      { name: 'Lemons', price: 85, image: '<img src="images/lemon.jpeg" alt="Lemons"/>' },
+      { name: 'Limes', price: 90, image: '<img src="images/lime.jpeg" alt="Limes"/>' },
+      { name: 'Coconut', price: 110, image: '<img src="images/coconut.jpeg" alt="Coconut"/>' },
+      { name: 'Blueberries', price: 200, image: '<img src="images/blueberries.jpeg" alt="Blueberries"/>' },
     ];
 
     const productList = document.getElementById('productList');
@@ -106,7 +123,10 @@
       list.forEach(p => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `<h3>${p.name}</h3><p class="price">KSh ${p.price}</p>`;
+        card.innerHTML = `
+        <div class="image">${p.image}</div>
+        <h3>${p.name}</h3>
+        <p class="price">KSh ${p.price}</p>`;
         productList.appendChild(card);
       });
     }
@@ -122,14 +142,20 @@
     /* =====================
        SIMPLE COOKIE (ETHICAL USE)
     ======================*/
-    document.cookie = "visited=true; max-age=86400";
+    
+
 
     /* =====================
        FORM VALIDATION
     ======================*/
     document.getElementById('regForm').addEventListener('submit', e => {
       e.preventDefault();
-      alert('Registration successful (frontend demo only).');
+            const username = document.getElementById('name').value;
+
+      alert(`Registration successful for user: ${username}`);
+
+    document.cookie = `user=${username}; max-age=86400`;
+
     });
   </script>
 </body>
